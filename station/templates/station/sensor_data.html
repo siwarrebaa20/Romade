@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Données des Capteurs pour l'Équipement {{ equipment.nom }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Données des capteurs pour l'équipement {{ equipment.nom }}</h1>
+
+        <h2>Liste des capteurs</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom du Capteur</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sensor in sensors %}
+                <tr>
+                    <td>{{ sensor.nom }}</td>
+                    <td>{{ sensor.type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Données des capteurs</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Capteur</th>
+                    <th>Valeur</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in sensor_data_list %}
+                <tr>
+                    <td>{{ data.capteur.nom }}</td>
+                    <td>{{ data.valeur }}</td>
+                    <td>{{ data.timestamp }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'add_sensor_data' equipment_id=equipment.id %}" class="btn btn-primary">Ajouter des données de capteur</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

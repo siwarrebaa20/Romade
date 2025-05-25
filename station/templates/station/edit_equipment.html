@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier un équipement</title>
+</head>
+<body>
+    <h1>Modifier l'équipement pour la station : {{ station.nom }}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sauvegarder</button>
+    </form>
+
+    <a href="{% url 'equipment_list' station.id %}">Retour à la liste des équipements</a>
+</body>
+</html>

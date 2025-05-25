@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier la station</title>
+</head>
+<body>
+    <h1>Modifier la station</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Modifier</button>
+    </form>
+
+    {% if form.errors %}
+        <h3>Il y a des erreurs dans votre formulaire :</h3>
+        <ul>
+            {% for field, errors in form.errors.items %}
+                <li><strong>{{ field }}:</strong> {{ errors }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="{% url 'station_list' %}">Retour à la liste des stations</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Bienvenue dans le dashboard personnalisé</h1>
+    <p>Stations: {{ stations }}</p>
+    <p>Alertes: {{ alerts }}</p>
+    <p>Paramètres: {{ params.count }}</p>
+
+    <canvas id="myChart" width="600" height="300"></canvas>
+
+    <script>
+        const labels = {{ labels|safe }};
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Valeur des paramètres',
+                data: {{ values|safe }},
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Évolution des paramètres'
+                    }
+                }
+            }
+        };
+
+        new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+</body>
+</html>
+

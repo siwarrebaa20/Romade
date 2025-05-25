@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des stations</title>
+    <!-- Lien vers Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Liste des stations</h1>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Localisation</th>
+                        <th>Capacité</th>
+                        <th>Date d'installation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for station in stations %}
+                    <tr>
+                        <td>
+                            {% if station.nom %}
+                                {{ station.nom }}
+                            {% else %}
+                                Unknown
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if station.localisation %}
+                                {{ station.localisation }}
+                            {% else %}
+                                Non spécifiée
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if station.capacite %}
+                                {{ station.capacite }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if station.date_installation %}
+                                {{ station.date_installation|date:"d M Y" }}
+                            {% else %}
+                                Non spécifiée
+                            {% endif %}
+                        </td>
+                        <td>
+                            <!-- Bouton Modifier -->
+                            <a href="{% url 'edit_station' station.id %}" class="btn btn-primary btn-sm me-1">Modifier</a>
+
+                            <!-- Bouton Supprimer -->
+                            <a href="{% url 'delete_station' station.id %}" class="btn btn-danger btn-sm me-1" onclick="return confirm('Voulez-vous vraiment supprimer cette station ?')">Supprimer</a>
+
+                            <!-- Bouton Équipements -->
+                            <a href="{% url 'equipment_list' station.id %}" class="btn btn-secondary btn-sm">Équipements</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{% url 'add_station' %}" class="btn btn-success mt-3">Ajouter une nouvelle station</a>
+    </div>
+
+    <!-- Lien vers Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+

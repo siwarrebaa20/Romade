@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supprimer la station</title>
+</head>
+<body>
+    <h2>Voulez-vous vraiment supprimer la station "{{ station.nom }}" ?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+        <a href="{% url 'station_list' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</body>
+</html>
